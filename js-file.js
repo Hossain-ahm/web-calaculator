@@ -1,5 +1,5 @@
 function add (x, y){
-    return x + y
+    return Number(x) + Number(y)
 }
 function subtract (x, y){
     return x - y
@@ -29,7 +29,8 @@ function operate(x, y, operator){
 const result = document.getElementById("result")
 const digits = document.querySelectorAll("button.digit");
 const operators = document.querySelectorAll("button.operator");
-
+const operateBtn =  document.getElementById("operate")
+const clear =  document.getElementById("clear")
 
 digits.forEach((digit) =>{
     digit.addEventListener("click", function() {
@@ -40,9 +41,21 @@ digits.forEach((digit) =>{
 
 operators.forEach((operareBtn) =>{
         operareBtn.addEventListener( "click",function(){
+            operator = operation[operareBtn.textContent]
+            if (firstNum !== ""){
+                result.textContent = operate(firstNum, secoundNum, operator)
+            }
             firstNum = result.textContent
             secoundNum = ""
-            result.textContent = "0"
-            operator = operation[operareBtn.textContent]
         })
+})
+
+operateBtn.addEventListener("click" , () => {
+    result.textContent = operate(firstNum, secoundNum, operator)
+})
+
+clear.addEventListener("click", () =>{
+    firstNum = ""
+    secoundNum = ""
+    result.textContent = "0"
 })
